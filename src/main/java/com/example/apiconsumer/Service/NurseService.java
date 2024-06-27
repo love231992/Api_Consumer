@@ -37,7 +37,9 @@ public class NurseService {
                 .uri("http://localhost:8080/deleteNurse")
                 .body(Mono.just(nurse), Nurse.class)
                 .retrieve()
-                .bodyToMono(Void.class).block();
+                .bodyToMono(Void.class)
+                .block(); // Used block to have ResponseEntity in endpoint
+                         // otherwise Mono<Void> has to be used in endpoint as return type.
     }
 
     public Mono<Void> saveNurse(Nurse nurse){
